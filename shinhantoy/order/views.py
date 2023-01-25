@@ -6,7 +6,7 @@ from .paginations import OrderLargePagination
 # Create your views here.
 
 
-class OrderView(
+class OrderListView(
     mixins.ListModelMixin,
     generics.GenericAPIView
 
@@ -17,7 +17,7 @@ class OrderView(
 
 
     def get_queryset(self):
-        return Order.objects.all()
+        return Order.objects.all().order_by('-id')
 
 
     def get(self,request,*args,**kwargs):
