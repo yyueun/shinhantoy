@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication", #jwt로 인증하는구나라고 앎
     )    
 }
 
@@ -147,13 +147,10 @@ AUTH_USER_MODEL= "member.Member"
 
 
 AUTHENTICATION_BACKENDS = [
-    "member.auth.MemberAuth"
+    "member.auth.MemberAuth" #그 모델로 로그인되게 auth파일 
 ]
 
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 
 if DEBUG:

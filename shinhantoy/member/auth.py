@@ -1,6 +1,6 @@
 from django.contrib.auth.hashers import check_password
 from .models import Member
-
+#로그인을 처리하는 로직 
 class MemberAuth: 
     def authenticate(self, request, username=None, password=None, *args, **kwargs):
         if not username or not password:
