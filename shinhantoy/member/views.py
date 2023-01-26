@@ -24,7 +24,7 @@ class RegisterView(
 
 
 class ChangePW(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]  #
 
 
     def put(self,request,*args,**kwargs):
