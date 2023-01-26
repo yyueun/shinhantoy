@@ -12,7 +12,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer): 
-    order_name = serializers.SerializerMethodField()
+    order_ord_no = serializers.SerializerMethodField()
     member_username = serializers.SerializerMethodField()
     tstamp = serializers.DateTimeField(
         read_only = True, format = '%Y-%m-%d %H:%M:%S' 

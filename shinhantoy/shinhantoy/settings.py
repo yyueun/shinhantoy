@@ -150,7 +150,9 @@ AUTHENTICATION_BACKENDS = [
     "member.auth.MemberAuth" #그 모델로 로그인되게 auth파일 
 ]
 
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 if DEBUG:

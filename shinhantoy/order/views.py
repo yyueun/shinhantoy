@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from .serializers import OrderSerializer, CommentCreateSerializer, CommentSerializer
 from .models import Order,Comment
 from rest_framework.response import Response
-
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 class OrderListView(
@@ -11,6 +11,7 @@ class OrderListView(
     generics.GenericAPIView
 ):
     serializer_class = OrderSerializer
+
 
     def get_queryset(self):
         return Order.objects.all().order_by('-id')
@@ -20,8 +21,8 @@ class OrderListView(
 
 #상세보기 
 class OrderDetailView(
-    mixins.ListModelMixin,
     generics.GenericAPIView,
+    mixins.RetrieveModelMixin
 
 ):
     serializer_class = OrderSerializer
@@ -30,13 +31,12 @@ class OrderDetailView(
         return Order.objects.all().order_by('id')
 
     def get(self,request,*args,**kwargs):
-        return self.list(request, args, kwargs)
+        return self.retrieve(request, args, kwargs)
 
 
 #댓글 리스트 
 class CommentListView(
     mixins.ListModelMixin,
-    mixins.CreateModelMixin,
     generics.GenericAPIView, 
 ): 
     serializer_class = CommentSerializer
@@ -64,6 +64,7 @@ class CommentCreateView(
     mixins.CreateModelMixin,
     generics.GenericAPIView
 ):
+    permission_classes = [IsAuthenticated]
     serializer_class = CommentCreateSerializer
 
     
