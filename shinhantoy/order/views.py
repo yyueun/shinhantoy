@@ -39,6 +39,7 @@ class OrderDetailView(
         return self.retrieve(request, args, kwargs)
 
 
+
 #댓글 리스트  --- 상품리스트와 같음 
 class CommentListView(
     mixins.ListModelMixin,
@@ -79,10 +80,3 @@ class CommentCreateView(
 
 
 #views를 만들면 -> urls수정
-
- 
-
-
-
-
-
