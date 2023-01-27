@@ -12,12 +12,14 @@
 
         //문서가 다 준비되면 밑에껄 수행하라는 것 document.ready
         $(document).ready(function () {
-
             const search = new URLSearchParams(location.search);
             let page = search.get('page');
+            //------------//
             if (!page){
                 page = 1;
+
             }
+            page =Number(page);
 
             if (order_id > 0) {  //상세페이지는 가리켜야함 어떤 주문의 상세를 보고싶은지를 정해야함 
                     //데이터 가져오기 (아래): API호출 코드
@@ -40,6 +42,27 @@
                 $.get("http://127.0.0.1:8000/api/order/"+ order_id+"/comment?page="+ page)
                     .then((result) => {
                         $("#comments").html("");
+                        $("#pagination").html("");
+                        const total = result.count;
+                        let pages = Math.ceil(total/10);
+
+                        let start_page = page-2;
+                        let end_page = page+2;
+
+                        if (start_page <1){
+                            start_page = 1;
+                        }
+                        if (end_page>pages){
+                            end_page=pages;
+                        }
+
+                        for (let i=start_page; i<=end_page; i++){
+                            $("#pagination").append(
+                            $(`<li class="page-item"><a class="page-link" onclick="go_page(${(i)})">${(i)}</a></li>`)
+                            )
+                        }
+
+
 
                         for (let i=0; i<result.results.length; i++) {
                             const comment = result.results[i];
@@ -112,13 +135,9 @@
             </ul> 
 
             <nav aria-label="Page navigation example">
-                <ul class="pagination">
+                <ul id ="pagination" class="pagination">
     
-                    <li class="page-item"><a class="page-link" onclick="go_page(1)" >1</a></li>
-                    <li class="page-item"><a class="page-link" onclick="go_page(2)">2</a></li>
-                    <li class="page-item"><a class="page-link" onclick="go_page(3)">3</a></li>
-                    <li class="page-item"><a class="page-link" onclick="go_page(4)">4</a></li>
-                    <li class="page-item"><a class="page-link" onclick="go_page(5)">5</a></li>
+
                 </ul>
             </nav>            
             
