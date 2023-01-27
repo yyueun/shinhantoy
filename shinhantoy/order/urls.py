@@ -7,3 +7,5 @@ urlpatterns = [
     path("/<int:order_id>/comment", views.CommentListView.as_view()),
     path("/comment", views.CommentCreateView.as_view()),
 ]
+
+#"" 안은 변수명
